@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Promoção Relâmpago</title>
+  <style>
+    body {
+      background-color: #000;
+      color: yellow;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .alerta {
+      color: red;
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #timer {
+      font-size: 2em;
+      color: red;
+    }
+
+    .image-container {
+      margin: 30px auto;
+      max-width: 800px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .pix-msg {
+      font-size: 1.5em;
+      margin: 30px 0 10px 0;
+    }
+
+    .pix-chave {
+      font-size: 1.2em;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .copy-btn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alerta">
+    ESSA PROMOÇÃO ACABA EM <span id="timer">15:00</span>!!!
+  </div>
+
+  <div class="image-container">
+    <img src="imagem.jpg" alt="Imagem da promoção">
+  </div>
+
+  <div class="pix-msg">
+    💸 ENVIE R$25,00 PARA A CHAVE PIX ABAIXO PARA DESBLOQUEAR MAIS DE 5000 CONTEÚDOS VIPS 👑
+  </div>
+
+  <div class="pix-chave" id="pixKey">
+    c0d8166a-bb5b-4ebe-b714-a759e85c3e80
+  </div>
+  <br>
+  <button class="copy-btn" onclick="copiarPix()">Copiar Chave Pix</button>
+
+  <script>
+    function startTimer(duration, display) {
+      let timer = duration, minutes, seconds;
+      const interval = setInterval(function () {
+        minutes = Math.floor(timer / 60);
+        seconds = timer % 60;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          clearInterval(interval);
+          display.textContent = "00:00";
+        }
+      }, 1000);
+    }
+
+    window.onload = function () {
+      const fifteenMinutes = 60 * 15;
+      const display = document.getElementById("timer");
+      startTimer(fifteenMinutes, display);
+    };
+
+    function copiarPix() {
+      const chave = document.getElementById("pixKey").textContent;
+      navigator.clipboard.writeText(chave).then(() => {
+        alert("Chave Pix copiada com sucesso!");
+      });
+    }
+  </script>
+
+</body>
+</html>
